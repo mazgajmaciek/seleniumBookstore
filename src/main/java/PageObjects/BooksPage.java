@@ -1,6 +1,5 @@
 package PageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +10,7 @@ public class BooksPage extends PageObject {
     private WebElement titleField;
 
     @FindBy(id = "author_id")
-    private Select authorSelect;
+    private WebElement authorSelect;
 
     @FindBy(id = "description")
     private WebElement descriptionField;
@@ -19,7 +18,7 @@ public class BooksPage extends PageObject {
     @FindBy(id = "bookEditSelect")
     private WebElement bookEditSelect;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/form/button")
+    @FindBy(xpath = "//form/button[contains(.,'Add')]")
     private WebElement addBookBtn;
 
 
@@ -32,24 +31,18 @@ public class BooksPage extends PageObject {
         titleField.sendKeys(title);
     }
 
-    public void addBookAuthor(String author_name) {
-        this.authorSelect = new Select(driver.findElement(By.id("author_id")));
-        authorSelect.selectByVisibleText(author_name);
-        //Select array to pull by 1st array element, not visibleText
+    public void addBookAuthor() {
+        Select dropdown = new Select(authorSelect);
+        dropdown.selectByIndex(1);
     }
 
     public void addBookDesc(String description) {
-        this.descriptionField.clear();
-        this.descriptionField.sendKeys(description);
+        descriptionField.clear();
+        descriptionField.sendKeys(description);
     }
 
     public void addBook (){
-//        this.addBookBtn = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/form/button"));
         addBookBtn.click();
     }
-
-//    public void editBook() {
-//        this
-//    }
 
 }
