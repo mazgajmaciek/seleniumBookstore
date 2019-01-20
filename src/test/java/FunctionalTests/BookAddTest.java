@@ -1,5 +1,6 @@
 package FunctionalTests;
 
+import PageObjects.BooksPage;
 import org.junit.Test;
 
 public class BookAddTest extends FunctionalTest {

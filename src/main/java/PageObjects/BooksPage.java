@@ -1,4 +1,4 @@
-package FunctionalTests;
+package PageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

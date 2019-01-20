@@ -19,11 +19,7 @@ public class FunctionalTest {
 
     @After
     public void tearDown() {
-        driver.close();
-    }
-
-    @Test
-    public void cleanUp() {
         driver.manage().deleteAllCookies();
+        driver.close();
     }
 }
