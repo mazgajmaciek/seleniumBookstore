@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class FunctionalTest {
+public class BaseTest {
     protected static WebDriver driver;
 
     @Before

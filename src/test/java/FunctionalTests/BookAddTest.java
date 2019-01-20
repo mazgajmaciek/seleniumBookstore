@@ -3,9 +3,7 @@ package FunctionalTests;
 import PageObjects.BooksPage;
 import org.junit.Test;
 
-import java.util.function.Consumer;
-
-import static FunctionalTests.FunctionalTest.driver;
+import static FunctionalTests.BaseTest.driver;
 
 public class BookAddTest {
     @Test
@@ -15,6 +13,7 @@ public class BookAddTest {
 //        BooksPage booksPage = new BooksPage(driver);
 
         //script for waiting for js load
+        BooksPage::addBookTitle("blabla");
         BooksPage::addBook();
 
         booksPage.addBookTitle("new_title");
