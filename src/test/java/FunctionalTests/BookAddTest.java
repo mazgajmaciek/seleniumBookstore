@@ -1,20 +1,22 @@
 package FunctionalTests;
 
 import PageObjects.BooksPage;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BookAddTest extends BaseTest{
+
+    BooksPage booksPage;
+
+    @BeforeClass
+    public void localSetUp() {
+        booksPage = new BooksPage(driver);
+        driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=books");
+    }
+
     @Test
     public void addBook() {
-        driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=books");
-
-//        BooksPage books = new BooksPage(driver);
-        BooksPage books = basePage.setWebDriver(driver);
-
-        //script for waiting for js load
-        BooksPage::addBookTitle("blabla");
-        BooksPage::addBook();
-
         booksPage.addBookTitle("new_title");
         booksPage.addBookAuthor();
         booksPage.addBookDesc("new_title_description");
@@ -23,10 +25,8 @@ public class BookAddTest extends BaseTest{
 
     @Test
     public void editBook() {
-        driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=books");
-
-        BooksPage booksPage = new BooksPage(driver);
-
+        booksPage.addBookAuthor(); //some other test, add author Tolkien
+        Assert.assertTrue(booksPage.checkIfAuthorCreatedByName("Tolkien"));
     }
 
 }

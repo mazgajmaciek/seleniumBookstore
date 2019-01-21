@@ -22,9 +22,9 @@ public class BooksPage extends Page {
     private WebElement addBookBtn;
 
 
-//    public BooksPage(WebDriver driver) {
-//        super(driver);
-//    }
+    public BooksPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void addBookTitle (String title) {
         titleField.clear();
@@ -43,6 +43,16 @@ public class BooksPage extends Page {
 
     public void addBook (){
         addBookBtn.click();
+    }
+
+    public boolean checkIfBookCreatedByName(String bookTitle) {
+//        if bookCreated bookTitle return true ....
+        return false;
+    }
+
+    public boolean checkIfAuthorCreatedByName(String authorName) {
+//        if bookCreated authorName return true ....
+        return false;
     }
 
 }
