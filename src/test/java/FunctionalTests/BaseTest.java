@@ -1,6 +1,6 @@
 package FunctionalTests;
 
-import PageObjects.BooksPage;
+import PageObjects.Page;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -9,13 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    protected static WebDriver driver;
+    private static WebDriver driver;
+    protected static Page basePage;
 
     @Before
     static public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        new BooksPage(driver);
+        basePage = new Page();
+        basePage.setWebDriver(driver);
     }
 
     @After

@@ -3,14 +3,13 @@ package FunctionalTests;
 import PageObjects.BooksPage;
 import org.junit.Test;
 
-import static FunctionalTests.BaseTest.driver;
-
-public class BookAddTest {
+public class BookAddTest extends BaseTest{
     @Test
     public void addBook() {
         driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=books");
 
-//        BooksPage booksPage = new BooksPage(driver);
+//        BooksPage books = new BooksPage(driver);
+        BooksPage books = basePage.setWebDriver(driver);
 
         //script for waiting for js load
         BooksPage::addBookTitle("blabla");

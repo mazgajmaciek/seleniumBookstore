@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class BooksPage extends PageObject {
+public class BooksPage extends Page {
     @FindBy(id = "title")
     private WebElement titleField;
 
@@ -22,9 +22,9 @@ public class BooksPage extends PageObject {
     private WebElement addBookBtn;
 
 
-    public BooksPage(WebDriver driver) {
-        super(driver);
-    }
+//    public BooksPage(WebDriver driver) {
+//        super(driver);
+//    }
 
     public void addBookTitle (String title) {
         titleField.clear();
