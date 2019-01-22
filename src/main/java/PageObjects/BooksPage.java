@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BooksPage extends Page {
     @FindBy(id = "title")
     private WebElement titleField;
@@ -20,6 +23,10 @@ public class BooksPage extends Page {
 
     @FindBy(xpath = "//form/button[contains(.,'Add')]")
     private WebElement addBookBtn;
+
+    @FindBy(xpath = "//*[@id='booksList']//*span[@class='bookTitle']//*[text()='new_title')]")
+    private List<String> booksList;
+
 
 
     public BooksPage(WebDriver driver) {
@@ -45,14 +52,21 @@ public class BooksPage extends Page {
         addBookBtn.click();
     }
 
-    public boolean checkIfBookCreatedByName(String bookTitle) {
-//        if bookCreated bookTitle return true ....
-        return false;
+    public void checkIfBookCreatedByName() {
+        List<String> list = booksList;
+        System.out.print(list);
+//        if (!list.isEmpty()) {
+//            String lastElement = list.get(list.size() - 1);
+//            if (lastElement == bookTitle) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
-    public boolean checkIfAuthorCreatedByName(String authorName) {
+//    public boolean checkIfAuthorCreatedByName(String authorName) {
 //        if bookCreated authorName return true ....
-        return false;
-    }
+//        return false;
+//    }
 
 }

@@ -7,10 +7,10 @@ import org.junit.Test;
 
 public class BookAddTest extends BaseTest{
 
-    BooksPage booksPage;
+    private static BooksPage booksPage;
 
     @BeforeClass
-    public void localSetUp() {
+    public static void localSetUp() {
         booksPage = new BooksPage(driver);
         driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=books");
     }
@@ -24,9 +24,10 @@ public class BookAddTest extends BaseTest{
     }
 
     @Test
-    public void editBook() {
-        booksPage.addBookAuthor(); //some other test, add author Tolkien
-        Assert.assertTrue(booksPage.checkIfAuthorCreatedByName("Tolkien"));
+    public void ifBookCreated() {
+//        booksPage.addBookAuthor(); //some other test, add author Tolkien
+//        Assert.assertTrue(booksPage.checkIfBookCreatedByName());
+        booksPage.checkIfBookCreatedByName();
     }
 
 }

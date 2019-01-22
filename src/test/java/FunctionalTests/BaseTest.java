@@ -1,7 +1,7 @@
 package FunctionalTests;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -11,14 +11,14 @@ public class BaseTest {
     protected static WebDriver driver;
 //    protected static Page basePage;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDown() {
         driver.manage().deleteAllCookies();
         driver.close();
     }
