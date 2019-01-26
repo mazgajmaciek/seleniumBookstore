@@ -8,6 +8,9 @@ import org.junit.Test;
 public class BookAddTest extends BaseTest{
 
     private static BooksPage booksPage;
+    private String newBookTitle = "new_title";
+    private String newBookDescription = "new_title_description";
+
 
     @BeforeClass
     public static void localSetUp() {
@@ -17,17 +20,23 @@ public class BookAddTest extends BaseTest{
 
     @Test
     public void addBook() {
-        booksPage.addBookTitle("new_title");
-        booksPage.addBookAuthor();
-        booksPage.addBookDesc("new_title_description");
+        booksPage.addBookTitle(newBookTitle);
+        booksPage.addBookAuthor(1);
+        booksPage.addBookDesc(newBookDescription);
         booksPage.addBook();
     }
 
     @Test
     public void ifBookCreated() {
-//        booksPage.addBookAuthor(); //some other test, add author Tolkien
-//        Assert.assertTrue(booksPage.checkIfBookCreatedByName());
-        booksPage.checkIfBookCreatedByName();
+        Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
     }
+
+    @Test
+    public void ifBookDescriptionCreated() {
+        booksPage.checkIfDescriptionCreatedByName();
+//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName());
+    }
+
+
 
 }

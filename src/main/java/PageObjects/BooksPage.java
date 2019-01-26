@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class BooksPage extends Page {
@@ -24,8 +23,11 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form/button[contains(.,'Add')]")
     private WebElement addBookBtn;
 
-    @FindBy(xpath = "//*[@id='booksList']//*span[@class='bookTitle']//*[text()='new_title')]")
-    private List<String> booksList;
+    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
+    private List<WebElement> booksListTitle;
+
+    @FindBy(xpath = "//ul[@id='booksList']/li/div[@class='panel-body book-description']")
+    private List<WebElement> booksListDescription;
 
 
 
@@ -38,9 +40,9 @@ public class BooksPage extends Page {
         titleField.sendKeys(title);
     }
 
-    public void addBookAuthor() {
+    public void addBookAuthor(int index) {
         Select dropdown = new Select(authorSelect);
-        dropdown.selectByIndex(1);
+        dropdown.selectByIndex(index);
     }
 
     public void addBookDesc(String description) {
@@ -52,21 +54,29 @@ public class BooksPage extends Page {
         addBookBtn.click();
     }
 
-    public void checkIfBookCreatedByName() {
-        List<String> list = booksList;
-        System.out.print(list);
-//        if (!list.isEmpty()) {
-//            String lastElement = list.get(list.size() - 1);
-//            if (lastElement == bookTitle) {
+    public boolean checkIfBookCreatedByName(String newBookTitle) {
+        List<WebElement> list = booksListTitle;
+        String lastAddedBookTitle = list.get(list.size() - 1).getText();
+        if (!list.isEmpty()) {
+            if (lastAddedBookTitle.equals(newBookTitle)) {
+                return true;
+            }
+        }
+        return false;
+}
+
+    public void checkIfDescriptionCreatedByName() {
+        List<WebElement> listDescription = booksListDescription;
+        String lastAddedBookDescription = listDescription.get(listDescription.size() - 1).getText();
+        System.out.println(lastAddedBookDescription);
+//        if (!lastAddedBookDescription.isEmpty()) {
+//            if (lastAddedBookTitle.equals(newBookTitle)) {
 //                return true;
 //            }
 //        }
 //        return false;
-    }
-
-//    public boolean checkIfAuthorCreatedByName(String authorName) {
 //        if bookCreated authorName return true ....
 //        return false;
-//    }
+    }
 
 }
