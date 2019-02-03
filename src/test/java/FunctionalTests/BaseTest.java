@@ -20,6 +20,6 @@ public class BaseTest {
     @AfterClass
     public static void tearDown() {
         driver.manage().deleteAllCookies();
-        driver.close();
+//        driver.close();
     }
 }

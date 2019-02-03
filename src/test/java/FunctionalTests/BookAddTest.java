@@ -10,6 +10,8 @@ public class BookAddTest extends BaseTest{
     private static BooksPage booksPage;
     private String newBookTitle = "new_title";
     private String newBookDescription = "new_title_description";
+    private String editBookTitle = "edit_title";
+    private String editBookDescription = "edit_description";
 
 
     @BeforeClass
@@ -33,10 +35,15 @@ public class BookAddTest extends BaseTest{
 
     @Test
     public void ifBookDescriptionCreated() {
-        booksPage.checkIfDescriptionCreatedByName();
-//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName());
+        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
     }
 
+    @Test
+    public void ifBookEdited() {
+        booksPage.editBook(editBookTitle,editBookDescription);
+//        booksPage.checkIfBookEdited(editBookTitle, editBookDescription);
+        Assert.assertTrue(booksPage.checkifBookEdited());
+    }
 
 
 }
