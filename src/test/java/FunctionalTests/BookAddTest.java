@@ -38,12 +38,12 @@ public class BookAddTest extends BaseTest{
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
     }
 
-    @Test
-    public void ifBookEdited() {
-        booksPage.editBook(editBookTitle,editBookDescription);
-//        booksPage.checkIfBookEdited(editBookTitle, editBookDescription);
-        Assert.assertTrue(booksPage.checkifBookEdited());
-    }
+//    @Test
+//    public void ifBookEdited() {
+//        booksPage.editBook(editBookTitle,editBookDescription);
+//        Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
+//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
+//    }
 
 
 }

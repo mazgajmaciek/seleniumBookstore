@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form[@id='bookEdit']//textarea[@id='description']")
     private WebElement bookEditDescription;
 
-    @FindBy(xpath = "//form[@id='bookEdit'/button[contains(.,'Edit')]")
+    @FindBy(xpath = "//form[@id='bookEdit']/button[contains(.,'Edit')]")
     private WebElement editBookBtn;
 
     @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
@@ -41,6 +43,9 @@ public class BooksPage extends Page {
 
     @FindBy(xpath = "//ul[@id='booksList']/li/div[@class='panel-body book-description']")
     private List<WebElement> booksListDescription;
+
+    @FindBy(xpath = "//ul[@id='booksList']/li/div/button[2]")
+    private WebElement bookDescriptionButton;
 
 
 
@@ -80,9 +85,15 @@ public class BooksPage extends Page {
 
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
         List<WebElement> listDescription = booksListDescription;
-        String lastAddedBookTitle = listDescription.get(listDescription.size() - 1).getText();
+        WebElement descriptionBtn = bookDescriptionButton;
+        descriptionBtn.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        descriptionBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[style=\"display: block;\"]")));
+
+        String lastAddedBookDescription = listDescription.get(listDescription.size() - 1).getText();
         if (!listDescription.isEmpty()) {
-                return lastAddedBookTitle.equals(newBookDescription);
+                return lastAddedBookDescription.equals(newBookDescription);
         }
         return false;
     }
@@ -108,12 +119,9 @@ public class BooksPage extends Page {
         editBookDescription.clear();
         editBookDescription.sendKeys(newDescription);
 
+        //submit edited book
         WebElement editBook = editBookBtn;
         editBook.submit();
-    }
-
-    public boolean checkifBookEdited() {
-        return true;
     }
 
 }
