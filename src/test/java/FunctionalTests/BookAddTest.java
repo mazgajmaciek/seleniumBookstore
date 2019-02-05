@@ -26,17 +26,25 @@ public class BookAddTest extends BaseTest{
         booksPage.addBookAuthor(1);
         booksPage.addBookDesc(newBookDescription);
         booksPage.addBook();
-    }
 
-    @Test
-    public void ifBookCreated() {
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
-    }
-
-    @Test
-    public void ifBookDescriptionCreated() {
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
     }
+
+//    @Test
+//    public void editBook() {
+//
+//    }
+
+//    @Test
+//    public void ifBookCreated() {
+//        Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
+//    }
+
+//    @Test
+//    public void ifBookDescriptionCreated() {
+//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
+//    }
 
 //    @Test
 //    public void ifBookEdited() {

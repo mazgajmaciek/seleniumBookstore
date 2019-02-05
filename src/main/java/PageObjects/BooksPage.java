@@ -45,8 +45,7 @@ public class BooksPage extends Page {
     private List<WebElement> booksListDescription;
 
     @FindBy(xpath = "//ul[@id='booksList']/li/div/button[2]")
-    private WebElement bookDescriptionButton;
-
+    private List<WebElement> bookDescriptionButton;
 
 
     public BooksPage(WebDriver driver) {
@@ -84,18 +83,21 @@ public class BooksPage extends Page {
 }
 
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
-        List<WebElement> listDescription = booksListDescription;
-        WebElement descriptionBtn = bookDescriptionButton;
-        descriptionBtn.click();
+        List<WebElement> bookListButtons = bookDescriptionButton;
+//        WebElement descriptionBtn = bookDescriptionButton;
+        WebElement lastListButton = bookListButtons.get(bookListButtons.size() - 1);
+        lastListButton.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        descriptionBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[style=\"display: block;\"]")));
+        return true;
 
-        String lastAddedBookDescription = listDescription.get(listDescription.size() - 1).getText();
-        if (!listDescription.isEmpty()) {
-                return lastAddedBookDescription.equals(newBookDescription);
-        }
-        return false;
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        descriptionBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[style=\"display: block;\"]")));
+//
+//        String lastAddedBookDescription = listDescription.get(listDescription.size() - 1).getText();
+//        if (!listDescription.isEmpty()) {
+//                return lastAddedBookDescription.equals(newBookDescription);
+//        }
+//        return false;
     }
 
     public void editBook(String newTitle, String newDescription) {
