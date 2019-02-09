@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BookAddTest extends BaseTest{
+public class BookAddTest extends BaseTest {
 
     private static BooksPage booksPage;
     private String newBookTitle = "new_title";
@@ -31,27 +31,12 @@ public class BookAddTest extends BaseTest{
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
     }
 
-//    @Test
-//    public void editBook() {
-//
-//    }
-
-//    @Test
-//    public void ifBookCreated() {
-//        Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
-//    }
-
-//    @Test
-//    public void ifBookDescriptionCreated() {
-//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
-//    }
-
-//    @Test
-//    public void ifBookEdited() {
-//        booksPage.editBook(editBookTitle,editBookDescription);
-//        Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
-//        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
-//    }
+    @Test
+    public void editBook() {
+        booksPage.editBook(editBookTitle, editBookDescription);
+        Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
+        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
+    }
 
 
 }
