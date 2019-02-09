@@ -22,13 +22,16 @@ public class BooksPageTest extends BaseTest {
 
     @Test
     public void addBook() {
-        //TODO - org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
+        //TODO - org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document - if wrong xpath, then why it's working when no books are on the page?
+
         booksPage.addBookTitle(newBookTitle);
         booksPage.addBookAuthor(1);
         booksPage.addBookDesc(newBookDescription);
         booksPage.addBook();
 
+        //TODO - sometimes throws AssertionError
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
+
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
     }
 
@@ -39,6 +42,11 @@ public class BooksPageTest extends BaseTest {
 
         //TODO - element not clickable
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
+    }
+
+    @Test
+    public void removeBook() {
+
     }
 
 

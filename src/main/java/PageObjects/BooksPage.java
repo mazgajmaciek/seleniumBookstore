@@ -29,7 +29,7 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form[@id='bookEdit']/div/input[@id='title']")
     private WebElement bookEditTitle;
 
-    @FindBy(id="author_id_edit")
+    @FindBy(id = "author_id_edit")
     private WebElement bookEditAuthor;
 
     @FindBy(xpath = "//form[@id='bookEdit']//textarea[@id='description']")
@@ -47,12 +47,15 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//ul[@id='booksList']/li/div/button[2]")
     private List<WebElement> bookDescriptionButton;
 
+    @FindBy(xpath = "//ul[@id='booksList']/li/div/button[1]")
+    private List<WebElement> bookDeleteButton;
+
 
     public BooksPage(WebDriver driver) {
         super(driver);
     }
 
-    public void addBookTitle (String title) {
+    public void addBookTitle(String title) {
         titleField.clear();
         titleField.sendKeys(title);
     }
@@ -67,7 +70,7 @@ public class BooksPage extends Page {
         descriptionField.sendKeys(description);
     }
 
-    public void addBook (){
+    public void addBook() {
         addBookBtn.click();
     }
 
@@ -80,7 +83,7 @@ public class BooksPage extends Page {
             }
         }
         return false;
-}
+    }
 
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
         List<WebElement> bookListButtons = bookDescriptionButton;
@@ -103,7 +106,7 @@ public class BooksPage extends Page {
     public void editBook(String newTitle, String newDescription) {
         //select last added book
         Select editBookDropdown = new Select(bookEditSelect);
-        int lastOptionIndex = editBookDropdown.getOptions().size()-1;
+        int lastOptionIndex = editBookDropdown.getOptions().size() - 1;
         editBookDropdown.selectByIndex(lastOptionIndex);
 
         //edit book title
@@ -113,7 +116,7 @@ public class BooksPage extends Page {
 
         //select last available author
         Select authorEditDropdown = new Select(bookEditAuthor);
-        int lastAuthorIndex = authorEditDropdown.getOptions().size()-1;
+        int lastAuthorIndex = authorEditDropdown.getOptions().size() - 1;
         authorEditDropdown.selectByIndex(lastAuthorIndex);
 
         //edit book description
@@ -124,6 +127,10 @@ public class BooksPage extends Page {
         //submit edited book
         WebElement editBook = editBookBtn;
         editBook.submit();
+    }
+
+    public void removeBook() {
+
     }
 
 }
