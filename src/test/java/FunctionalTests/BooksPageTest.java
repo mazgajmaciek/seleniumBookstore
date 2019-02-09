@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BookAddTest extends BaseTest {
+public class BooksPageTest extends BaseTest {
 
     private static BooksPage booksPage;
     private String newBookTitle = "new_title";
@@ -22,6 +22,7 @@ public class BookAddTest extends BaseTest {
 
     @Test
     public void addBook() {
+        //TODO - org.openqa.selenium.StaleElementReferenceException: stale element reference: element is not attached to the page document
         booksPage.addBookTitle(newBookTitle);
         booksPage.addBookAuthor(1);
         booksPage.addBookDesc(newBookDescription);
@@ -35,6 +36,8 @@ public class BookAddTest extends BaseTest {
     public void editBook() {
         booksPage.editBook(editBookTitle, editBookDescription);
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
+
+        //TODO - element not clickable
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
     }
 
