@@ -12,6 +12,7 @@ public class Page {
 
     public void setWebDriver(WebDriver driver){
         Page.driver = driver;
+        //TODO - initElements is not enough for catching elements on websites with JS
         PageFactory.initElements(driver, this);
     }
 }

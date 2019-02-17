@@ -36,9 +36,9 @@ public class AuthorsPage extends Page {
         addAuthorBtn.click();
     }
 
-    public boolean checkIfAuthorCreated(String name, String surname, String description) {
-
-    }
+//    public boolean checkIfAuthorCreated(String name, String surname, String description) {
+//
+//    }
 
 //    public boolean checkIfAuthorCreatedByName(String name, String surname, String description) {
 //        List<WebElement> list = booksListTitle;

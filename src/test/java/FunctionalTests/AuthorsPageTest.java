@@ -19,10 +19,10 @@ public class AuthorsPageTest extends BaseTest {
         driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=authors");
     }
 
-    @Test
-    public void addAuthor() {
-
-        authorsPage.addAuthor(newAuthorName, newAuthorSurname, newAuthorDescription);
-        Assert.assertTrue(authorsPage.checkIfAuthorCreated(name, surname, description));
-    }
+//    @Test
+//    public void addAuthor() {
+//
+//        authorsPage.addAuthor(newAuthorName, newAuthorSurname, newAuthorDescription);
+//        Assert.assertTrue(authorsPage.checkIfAuthorCreated(name, surname, description));
+//    }
 }

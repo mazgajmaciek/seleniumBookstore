@@ -11,7 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class BooksPage extends Page {
-    @FindBy(id = "title")
+
+    public BooksPage(WebDriver driver) {
+        super(driver);
+    }
+
+    @FindBy(xpath = "//form[@id='bookAdd']//input[@id='title']")
     private WebElement titleField;
 
     @FindBy(id = "author_id")
@@ -38,8 +43,8 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form[@id='bookEdit']/button[contains(.,'Edit')]")
     private WebElement editBookBtn;
 
-    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
-    private List<WebElement> booksListTitle;
+//    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
+//    private List<WebElement> booksListTitle;
 
     @FindBy(xpath = "//ul[@id='booksList']/li/div[@class='panel-body book-description']")
     private List<WebElement> booksListDescription;
@@ -51,8 +56,13 @@ public class BooksPage extends Page {
     private List<WebElement> bookDeleteButton;
 
 
-    public BooksPage(WebDriver driver) {
-        super(driver);
+
+    public List<WebElement> addBookForm() {
+        return driver.findElements(By.xpath("//form[@id='bookAdd']"));
+    }
+
+    public List<WebElement> booksListTitle() {
+        return driver.findElements(By.xpath("//ul[@id='booksList']/li/div/span"));
     }
 
     public void addBookTitle(String title) {
@@ -75,7 +85,7 @@ public class BooksPage extends Page {
     }
 
     public boolean checkIfBookCreatedByName(String newBookTitle) {
-        List<WebElement> list = booksListTitle;
+        List<WebElement> list = booksListTitle();
         String lastAddedBookTitle = list.get(list.size() - 1).getText();
         if (!list.isEmpty()) {
             if (lastAddedBookTitle.equals(newBookTitle)) {
