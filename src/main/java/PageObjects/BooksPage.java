@@ -114,11 +114,11 @@ public class BooksPage extends Page {
 //            return bools;
     }
 
-    public void clickDescButton() {
+    public boolean clickDescButton() {
         lastBookDescButton().click();
         //TODO - calling WebDRiverWait within PageObject method?
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.attributeToBe(lastBookDescription(), "style", "display: block;"));
+        return wait.until(ExpectedConditions.attributeToBe(lastBookDescription(), "style", "display: block;"));
     }
 
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {

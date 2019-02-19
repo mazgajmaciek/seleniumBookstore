@@ -32,7 +32,7 @@ public class BooksPageTest extends BaseTest {
 
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
 //        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
-        booksPage.clickDescButton();
+        Assert.assertTrue(booksPage.clickDescButton());
     }
 
 //    @Test
