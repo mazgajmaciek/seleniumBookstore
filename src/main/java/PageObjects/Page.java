@@ -13,6 +13,7 @@ public class Page {
     public void setWebDriver(WebDriver driver){
         Page.driver = driver;
         //TODO - initElements is not enough for catching elements on websites with JS
+        //TODO - when initElements commented, it will throw NullPointerException since @FindBy elements in Page Object are using it
         PageFactory.initElements(driver, this);
     }
 }

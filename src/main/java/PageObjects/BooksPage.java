@@ -16,6 +16,7 @@ public class BooksPage extends Page {
         super(driver);
     }
 
+    //initElements
     @FindBy(xpath = "//form[@id='bookAdd']//input[@id='title']")
     private WebElement titleField;
 
@@ -43,8 +44,8 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form[@id='bookEdit']/button[contains(.,'Edit')]")
     private WebElement editBookBtn;
 
-//    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
-//    private List<WebElement> booksListTitle;
+    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
+    private List<WebElement> booksListTitle;
 
     @FindBy(xpath = "//ul[@id='booksList']/li/div[@class='panel-body book-description']")
     private List<WebElement> booksListDescription;
@@ -63,6 +64,18 @@ public class BooksPage extends Page {
 
     public List<WebElement> booksListTitle() {
         return driver.findElements(By.xpath("//ul[@id='booksList']/li/div/span"));
+    }
+
+    public WebElement lastBookTitle() {
+        return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div/span"));
+    }
+
+    public WebElement lastBookDescButton() {
+        return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div/button[2]"));
+    }
+
+    public WebElement lastBookDescription() {
+        return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div/span"));
     }
 
     public void addBookTitle(String title) {
@@ -85,23 +98,28 @@ public class BooksPage extends Page {
     }
 
     public boolean checkIfBookCreatedByName(String newBookTitle) {
-        List<WebElement> list = booksListTitle();
-        String lastAddedBookTitle = list.get(list.size() - 1).getText();
-        if (!list.isEmpty()) {
-            if (lastAddedBookTitle.equals(newBookTitle)) {
-                return true;
-            }
-        }
-        return false;
+        //TODO - List<WebElement> list won't work here, because when it gets created within the method, the references to webpage elements might have already changed
+//        List<WebElement> list = booksListTitle();
+//        String lastAddedBookTitle = list.get(list.size() - 1).getText();
+        //TODO lastBookTitle() always return last bookList element via xpath
+        return lastBookTitle().getText().equals(newBookTitle);
+//            WebElement el = lastBookTitle();
+//            String elS = el.getText();
+//            boolean bools = elS.equals(newBookTitle);
+//            return bools;
     }
 
-    public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
-        List<WebElement> bookListButtons = bookDescriptionButton;
-//        WebElement descriptionBtn = bookDescriptionButton;
-        WebElement lastListButton = bookListButtons.get(bookListButtons.size() - 1);
-        lastListButton.click();
+    public void clickDescButton() {
+        lastBookDescButton().click();
+    }
 
-        return true;
+//    public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
+
+//        WebElement descriptionBtn = bookDescriptionButton;
+//        WebElement lastListButton = bookListButtons.get(bookListButtons.size() - 1);
+//        lastListButton.click();
+//
+//        return true;
 
 //        WebDriverWait wait = new WebDriverWait(driver, 5);
 //        descriptionBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[style=\"display: block;\"]")));
@@ -111,33 +129,33 @@ public class BooksPage extends Page {
 //                return lastAddedBookDescription.equals(newBookDescription);
 //        }
 //        return false;
-    }
+//    }
 
-    public void editBook(String newTitle, String newDescription) {
-        //select last added book
-        Select editBookDropdown = new Select(bookEditSelect);
-        int lastOptionIndex = editBookDropdown.getOptions().size() - 1;
-        editBookDropdown.selectByIndex(lastOptionIndex);
-
-        //edit book title
-        WebElement editBookTitle = bookEditTitle;
-        editBookTitle.clear();
-        editBookTitle.sendKeys(newTitle);
-
-        //select last available author
-        Select authorEditDropdown = new Select(bookEditAuthor);
-        int lastAuthorIndex = authorEditDropdown.getOptions().size() - 1;
-        authorEditDropdown.selectByIndex(lastAuthorIndex);
-
-        //edit book description
-        WebElement editBookDescription = bookEditDescription;
-        editBookDescription.clear();
-        editBookDescription.sendKeys(newDescription);
-
-        //submit edited book
-        WebElement editBook = editBookBtn;
-        editBook.submit();
-    }
+//    public void editBook(String newTitle, String newDescription) {
+//        //select last added book
+//        Select editBookDropdown = new Select(bookEditSelect);
+//        int lastOptionIndex = editBookDropdown.getOptions().size() - 1;
+//        editBookDropdown.selectByIndex(lastOptionIndex);
+//
+//        //edit book title
+//        WebElement editBookTitle = bookEditTitle;
+//        editBookTitle.clear();
+//        editBookTitle.sendKeys(newTitle);
+//
+//        //select last available author
+//        Select authorEditDropdown = new Select(bookEditAuthor);
+//        int lastAuthorIndex = authorEditDropdown.getOptions().size() - 1;
+//        authorEditDropdown.selectByIndex(lastAuthorIndex);
+//
+//        //edit book description
+//        WebElement editBookDescription = bookEditDescription;
+//        editBookDescription.clear();
+//        editBookDescription.sendKeys(newDescription);
+//
+//        //submit edited book
+//        WebElement editBook = editBookBtn;
+//        editBook.submit();
+//    }
 
     public void removeBook() {
 

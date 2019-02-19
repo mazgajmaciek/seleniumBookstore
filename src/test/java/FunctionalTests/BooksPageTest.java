@@ -30,11 +30,9 @@ public class BooksPageTest extends BaseTest {
         booksPage.addBookDesc(newBookDescription);
         booksPage.addBook();
 
-        //TODO - throws staleElementException
-        //TODO - dodajac ksiazke zmieniam liczbe elementow w liscie ale sprawdzam ja dopiero po dodaniu (checkIfBookCreatedByName()) wiec czemu rzuca stale?
-        booksPage.checkIfBookCreatedByName(newBookTitle);
-//        Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
+        Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
 //        Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
+        booksPage.clickDescButton();
     }
 
 //    @Test
