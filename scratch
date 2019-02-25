@@ -1,0 +1,44 @@
+public void waitUntilPresenceOfElements(By locator, long timeout) {
+    try {
+        webDriver.manage().timeouts().implicitlyWait(0L, TimeUnit.MILLISECONDS);
+        new FluentWait<>(webDriver)
+                .withTimeout(timeout, TimeUnit.MILLISECONDS)
+                .pollingEvery(100, TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    } finally {
+        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+} 
+//i potem uzywasz tego tak:
+waitUntilPresenceOfElements(By.xpath("//div[@data-ui-element='menu_top_item']"), 2000);
+
+
+public static WebDriver waitForJSandJQueryToLoad(WebDriver wd) {
+    // wait for jQuery to load
+    ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver driver) {
+            try {
+                return ((Long)((JavascriptExecutor)wd).executeScript("return jQuery.active") == 0);
+            }
+            catch (Exception e) {
+                // no jQuery present
+                return true;
+            }
+        }
+    };
+    // wait for Javascript to load
+    ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+        @Override
+        public Boolean apply(WebDriver driver) {
+            return ((JavascriptExecutor)wd).executeScript("return document.readyState")
+                    .toString().equals("complete");
+        }
+    };
+    return wd;
+} 
+
+//albo zwykly wait :
+wait.until(webDriver -> wd.findElement(By.xpath("//div[@class='v6-simplified-header__app-title']"))).isDisplayed(); 
