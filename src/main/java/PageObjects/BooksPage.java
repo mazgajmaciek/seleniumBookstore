@@ -1,9 +1,11 @@
 package PageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -105,7 +107,7 @@ public class BooksPage extends Page {
         //TODO lastBookTitle() always return last bookList element via xpath
 //        WebDriverWait wait = new WebDriverWait(driver, 5);
 //        wait.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //TODO - looks like I need to wait for book to be added to the list before checking the new title
+        //TODO - looks like I need to wait for book to be added to the list before checking the new title - waiting for AJAX to finish?
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return lastBookTitle().getText().equals(newBookTitle);
 //            WebElement el = lastBookTitle();
