@@ -35,8 +35,6 @@ public class BooksPageTest extends BaseTest {
     public void editBook() {
         booksPage.editBook(editBookTitle, editBookDescription);
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
-
-        //TODO - element not clickable
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
     }
 
