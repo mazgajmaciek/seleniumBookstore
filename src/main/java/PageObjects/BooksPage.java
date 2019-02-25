@@ -81,6 +81,28 @@ public class BooksPage extends Page {
         return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div[2]"));
     }
 
+    public boolean waitForJSandJQueryToLoad() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        // wait for jQuery to load
+        ExpectedCondition<Boolean> jQueryLoad = driver -> {
+            try {
+                return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
+            }
+            catch (Exception e) {
+                // no jQuery present
+                return true;
+            }
+        };
+
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState")
+                .toString().equals("complete");
+
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
     public void addBookTitle(String title) {
         titleField.clear();
         titleField.sendKeys(title);
@@ -108,7 +130,7 @@ public class BooksPage extends Page {
 //        WebDriverWait wait = new WebDriverWait(driver, 5);
 //        wait.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //TODO - looks like I need to wait for book to be added to the list before checking the new title - waiting for AJAX to finish?
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return lastBookTitle().getText().equals(newBookTitle);
 //            WebElement el = lastBookTitle();
 //            String elS = el.getText();
@@ -116,15 +138,17 @@ public class BooksPage extends Page {
 //            return bools;
     }
 
-    public boolean clickDescButton() {
-        lastBookDescButton().click();
-        //TODO - calling WebDRiverWait within PageObject method?
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        return wait.until(ExpectedConditions.attributeToBe(lastBookDescription(), "style", "display: block;"));
-    }
+//    public boolean clickDescButton() {
+//
+//        //TODO - calling WebDRiverWait within PageObject method?
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        return wait.until(ExpectedConditions.attributeToBe(lastBookDescription(), "style", "display: block;"));
+//    }
 
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
-        clickDescButton();
+        lastBookDescButton().click();
+        waitForJSandJQueryToLoad();
+//        clickDescButton();
         return lastBookDescription().getText().equals(newBookDescription);
 //        WebElement descriptionBtn = bookDescriptionButton;
 //        WebElement lastListButton = bookListButtons.get(bookListButtons.size() - 1);
