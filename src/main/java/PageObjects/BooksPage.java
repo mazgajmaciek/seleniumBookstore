@@ -80,6 +80,10 @@ public class BooksPage extends Page {
         return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div[2]"));
     }
 
+    public WebElement lastBookRemoveBtn() {
+        return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div[1]/button[1]"));
+    }
+
     public boolean waitForJSandJQueryToLoad() {
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -160,6 +164,10 @@ public class BooksPage extends Page {
     }
 
     public void removeBook() {
+        int currentBookNo =
+    }
+
+    public void checkIfBookRemoved() {
 
     }
 
