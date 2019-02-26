@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class BooksPage extends Page {
 
     public BooksPage(WebDriver driver) {
@@ -46,27 +44,11 @@ public class BooksPage extends Page {
     @FindBy(xpath = "//form[@id='bookEdit']/button[contains(.,'Edit')]")
     private WebElement editBookBtn;
 
-    @FindBy(xpath = "//ul[@id='booksList']/li/div/span")
-    private List<WebElement> booksListTitle;
-
-    @FindBy(xpath = "//ul[@id='booksList']/li/div[@class='panel-body book-description']")
-    private List<WebElement> booksListDescription;
-
-    @FindBy(xpath = "//ul[@id='booksList']/li/div/button[2]")
-    private List<WebElement> bookDescriptionButton;
-
-    @FindBy(xpath = "//ul[@id='booksList']/li/div/button[1]")
-    private List<WebElement> bookDeleteButton;
-
-
-
-    public List<WebElement> addBookForm() {
-        return driver.findElements(By.xpath("//form[@id='bookAdd']"));
+    public int booksListSize() {
+        return driver.findElements(By.xpath("//ul[@id='booksList']/li")).size();
     }
 
-    public List<WebElement> booksListTitle() {
-        return driver.findElements(By.xpath("//ul[@id='booksList']/li/div/span"));
-    }
+    public int currentBookListSize;
 
     public WebElement lastBookTitle() {
         return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div/span"));
@@ -84,6 +66,7 @@ public class BooksPage extends Page {
         return driver.findElement(By.xpath("//ul[@id='booksList']/li[last()]/div[1]/button[1]"));
     }
 
+    //https://stackoverflow.com/questions/33348600/selenium-wait-for-ajax-content-to-load-universal-approach
     public boolean waitForJSandJQueryToLoad() {
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -123,6 +106,8 @@ public class BooksPage extends Page {
 
     public void addBook() {
         addBookBtn.click();
+        waitForJSandJQueryToLoad();
+        currentBookListSize = booksListSize();
     }
 
     public boolean checkIfBookCreatedByName(String newBookTitle) {
@@ -164,12 +149,14 @@ public class BooksPage extends Page {
         editBook.submit();
     }
 
-//    public void removeBook() {
-//        int currentBookNo =
-//    }
+    public void removeBook() {
+        lastBookRemoveBtn().click();
+        waitForJSandJQueryToLoad();
+    }
 
-    public void checkIfBookRemoved() {
-
+    public boolean checkIfBookRemoved() {
+        int bookListSizeAfterRemoval = booksListSize();
+        return bookListSizeAfterRemoval < currentBookListSize;
     }
 
 }

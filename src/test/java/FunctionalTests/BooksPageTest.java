@@ -40,8 +40,7 @@ public class BooksPageTest extends BaseTest {
 
     @Test
     public void removeBook() {
-
+        booksPage.removeBook();
+        Assert.assertTrue(booksPage.checkIfBookRemoved());
     }
-
-
 }
