@@ -164,9 +164,9 @@ public class BooksPage extends Page {
         editBook.submit();
     }
 
-    public void removeBook() {
-        int currentBookNo =
-    }
+//    public void removeBook() {
+//        int currentBookNo =
+//    }
 
     public void checkIfBookRemoved() {
 
