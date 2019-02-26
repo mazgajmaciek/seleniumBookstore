@@ -129,6 +129,7 @@ public class BooksPage extends Page {
     public boolean checkIfDescriptionCreatedByName(String newBookDescription) {
         Actions action = new Actions(driver);
         action.moveToElement(lastBookDescButton()).click().perform();
+        action.moveToElement(lastBookDescButton()).click().perform();
         waitForJSandJQueryToLoad();
         return lastBookDescription().getText().equals(newBookDescription);
     }
