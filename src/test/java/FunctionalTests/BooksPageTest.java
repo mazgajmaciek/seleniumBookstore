@@ -21,7 +21,7 @@ public class BooksPageTest extends BaseTest {
     }
 
     @Test
-    public void addBook() {
+    public void addAndEditBook() {
         booksPage.addBookTitle(newBookTitle);
         booksPage.addBookAuthor(1);
         booksPage.addBookDesc(newBookDescription);
@@ -29,10 +29,7 @@ public class BooksPageTest extends BaseTest {
 
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(newBookTitle));
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(newBookDescription));
-    }
 
-    @Test
-    public void editBook() {
         booksPage.editBook(editBookTitle, editBookDescription);
         Assert.assertTrue(booksPage.checkIfBookCreatedByName(editBookTitle));
         Assert.assertTrue(booksPage.checkIfDescriptionCreatedByName(editBookDescription));
