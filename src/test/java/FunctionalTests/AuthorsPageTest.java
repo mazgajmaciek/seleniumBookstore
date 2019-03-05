@@ -1,7 +1,6 @@
 package FunctionalTests;
 
 import PageObjects.AuthorsPage;
-import PageObjects.BooksPage;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,12 +22,14 @@ public class AuthorsPageTest extends BaseTest {
         driver.get("https://www.maciekmazgaj.com/bookstore/frontend/?action=authors");
     }
 
+    @Test
+    public void addAndEditAuthor() {
+        authorsPage.addAuthor(newAuthorName, newAuthorSurname, newAuthorDescription);
+        Assert.assertTrue(authorsPage.checkIfAuthorCreatedBy(newAuthorName, newAuthorSurname));
+        Assert.assertTrue(authorsPage.checkIfAuthorDescriptionCreatedBy(newAuthorDescription));
 
-
-//    @Test
-//    public void addAuthor() {
-//
-//        authorsPage.addAuthor(newAuthorName, newAuthorSurname, newAuthorDescription);
-//        Assert.assertTrue(authorsPage.checkIfAuthorCreated(name, surname, description));
-//    }
+        authorsPage.editAuthor(editAuthorName, editAuthorSurname, editAuthorDescription);
+        Assert.assertTrue(authorsPage.checkIfAuthorEditedBy(editAuthorName, editAuthorSurname));
+        Assert.assertTrue(authorsPage.checkIfAuthorDescriptionEditedBy(editAuthorDescription));
+    }
 }
