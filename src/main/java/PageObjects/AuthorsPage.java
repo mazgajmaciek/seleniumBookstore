@@ -10,13 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class AuthorsPage extends Page {
-
-    public AuthorsPage(WebDriver driver) {
-        super(driver);
-    }
 
     @FindBy(id = "name")
     private WebElement authorName;
@@ -45,6 +42,24 @@ public class AuthorsPage extends Page {
     @FindBy(xpath = "//form[@id='authorEdit']/button[contains(.,'Edit')]")
     private WebElement editAuthorBtn;
 
+    public AuthorsPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public WebElement lastAuthorRemoveBtn() {
+        return driver.findElement(By.xpath("//ul[@id='authorsList']/li[last()]/div[1]/button[1]"));
+    }
+
+    public int authorListSize() {
+        return driver.findElements(By.xpath("//ul[@id='authorsList']/li")).size();
+    }
+
+    public int currentAuthorListSize;
+
+    public List<WebElement> bookButtonsList() {
+        return driver.findElements(By.xpath("//ul[@id='authorsList']/li/div/button[2]"));
+    }
+
     public WebElement lastAuthor() {
         return driver.findElement(By.xpath("//ul[@id='authorsList']/li[last()]/div/span"));
     }
@@ -57,10 +72,6 @@ public class AuthorsPage extends Page {
         return driver.findElement(By.xpath("//ul[@id='authorsList']/li[last()]/div[1]/button[3]"));
     }
 
-//    public WebElement lastBookTitle() {
-//        return driver.findElement(By.xpath("//ul[@id='authorsList']/li[last()]/div/span"));
-//    }
-
     public boolean waitForJSandJQueryToLoad() {
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -68,16 +79,15 @@ public class AuthorsPage extends Page {
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = driver -> {
             try {
-                return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
-            }
-            catch (Exception e) {
+                return ((Long) ((JavascriptExecutor) driver).executeScript("return jQuery.active") == 0);
+            } catch (Exception e) {
                 // no jQuery present
                 return true;
             }
         };
 
         // wait for Javascript to load
-        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState")
+        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState")
                 .toString().equals("complete");
 
         return wait.until(jQueryLoad) && wait.until(jsLoad);
@@ -93,6 +103,7 @@ public class AuthorsPage extends Page {
         authorDescription.sendKeys(description);
 
         addAuthorBtn.click();
+        currentAuthorListSize = authorListSize();
     }
 
     public boolean checkIfAuthorCreatedBy(String name, String surname) {
@@ -134,8 +145,6 @@ public class AuthorsPage extends Page {
     }
 
     public boolean checkIfAuthorEditedBy(String editName, String editSurname) {
-//        Actions action = new Actions(driver);
-//        action.moveToElement(lastAuthorDescButton()).click().perform();
         waitForJSandJQueryToLoad();
         return lastAuthor().getText().equals(editName + " " + editSurname);
     }
@@ -146,6 +155,24 @@ public class AuthorsPage extends Page {
         action.moveToElement(lastAuthorDescButton()).click().perform();
         waitForJSandJQueryToLoad();
         return lastAuthorDescription().getText().equals(editDescription);
+    }
+
+    public void removeAuthor() {
+        currentAuthorListSize = authorListSize();
+        lastAuthorRemoveBtn().click();
+        waitForJSandJQueryToLoad();
+    }
+
+    public boolean checkIfAuthorRemoved() {
+        int bookListSizeAfterRemoval = authorListSize();
+//        int bookListSizeAfterRemoval = authorListSize();
+        return bookListSizeAfterRemoval < currentAuthorListSize;
+    }
+
+    public void clickBookButtons() {
+        for (WebElement element : bookButtonsList()) {
+            element.click();
+        }
     }
 
 }

@@ -32,4 +32,15 @@ public class AuthorsPageTest extends BaseTest {
         Assert.assertTrue(authorsPage.checkIfAuthorEditedBy(editAuthorName, editAuthorSurname));
         Assert.assertTrue(authorsPage.checkIfAuthorDescriptionEditedBy(editAuthorDescription));
     }
+
+    @Test
+    public void removeAuthor() {
+        authorsPage.removeAuthor();
+        Assert.assertTrue(authorsPage.checkIfAuthorRemoved());
+    }
+
+    @Test
+    public void checkIfBookButtonsClickable() {
+        authorsPage.clickBookButtons();
+    }
 }
